@@ -7,6 +7,7 @@ namespace VFSMonitor
     public partial class App : Application
     {
         public static string url = "https://monitor-api-nine.now.sh";
+        public static string path = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
 
         public App()
         {

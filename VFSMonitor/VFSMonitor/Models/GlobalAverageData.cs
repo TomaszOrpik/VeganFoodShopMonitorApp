@@ -11,7 +11,7 @@ namespace VFSMonitor.Models
         public string MostPopularLocation { get; set; }
         public string MostPopularReffer { get; set; }
         public decimal AverageTimeOnPages { get; set; }
-        public decimal AverageItemsBuy { get; set; }
+        public decimal AvItemBuy { get; set; }
         public bool MostlyLogged { get; set; }
     }
 }

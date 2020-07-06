@@ -38,8 +38,8 @@
                     <Label Text="{Binding location}" Style="{StaticResource AverageValueStyle}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding reffer}" Style="{StaticResource AverageKeyStyle}"/>
-                    <Label Text="None" Style="{StaticResource AverageValueStyle}"/>
+                    <Label Text="Reffer" Style="{StaticResource AverageKeyStyle}"/>
+                    <Label Text="{Binding reffer}" Style="{StaticResource AverageValueStyle}"/>
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Time on Pages" Style="{StaticResource SmallTitleStayle}"/>
@@ -57,7 +57,7 @@
                 </StackLayout>
                 <StackLayout>
                     <Label Text="Items Buyed" Style="{StaticResource SmallTitleStayle}"/>
-                    <forms:ChartView x:Name="BuyedChart" HeightRequest="150" BackgroundColor="Transparent"/>
+                    <forms:ChartView x:Name="BuyedChart" HeightRequest="150" BackgroundColor="Transparent" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="DidLogged" Style="{StaticResource AverageKeyStyle}"/>
@@ -67,7 +67,7 @@
                     <Label Text="DidContacted" Style="{StaticResource AverageKeyStyle}"/>
                     <CheckBox IsChecked="{Binding didContacted}" IsEnabled="False" Color="Black" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
-                <Button Text="Export to EXCEL" Style="{StaticResource ButtonStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                <Button Text="Export to EXCEL" Style="{StaticResource ButtonStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="End" Clicked="Export_Clicked"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

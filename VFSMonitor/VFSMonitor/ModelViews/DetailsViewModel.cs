@@ -1,7 +1,9 @@
-﻿using Microcharts;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microcharts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using VFSMonitor.Models;
 
 namespace VFSMonitor.ModelViews
@@ -23,17 +25,17 @@ namespace VFSMonitor.ModelViews
             browser = session.Browser;
             location = session.Location;
             reffer = session.Reffer;
-            fillPagesChart(session.Pages);
+            FillPagesChart(session.Pages);
             cartItems = session.CartItems;
-            fillBuyedItemsChart(session.BuyedItems);
+            FillBuyedItemsChart(session.BuyedItems);
             didLogged = session.DidLogged;
             didContacted = session.DidContacted;
 
         }
 
-        private void fillPagesChart(IList<Page> pages)
+        private void FillPagesChart(IList<Models.Page> pages)
         {
-            foreach(Page page in pages)
+            foreach(Models.Page page in pages)
             {
                 var random = new Random();
                 var color = String.Format("#{0:X6}", random.Next(0x1000000));
@@ -48,7 +50,7 @@ namespace VFSMonitor.ModelViews
             }
         }
 
-        private void fillBuyedItemsChart(IList<BuyedItem> items)
+        private void FillBuyedItemsChart(IList<BuyedItem> items)
         {
             foreach(BuyedItem item in items)
             {
@@ -63,6 +65,107 @@ namespace VFSMonitor.ModelViews
                 };
                 buyedItemsChart.Add(entry);
             }
+        }
+        public string SaveToExcelControl()
+        {
+            try { SaveToExcel(); }
+            catch (Exception e) { return "Occured error: " + e.Message; }
+            return "Data Exported Succesfully!";
+        }
+
+        private void SaveToExcel()
+        {
+            string date = DateTime.Now.ToShortDateString();
+            date = date.Replace("/", "_");
+
+            string fileName = System.IO.Path.Combine(App.path, date + "VeganShopSession"+ sessionId + "Details.xlsx");
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
+            {
+                WorksheetPart worksheetPart = createWorkSheet(document, sessionId + "Details");
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                Row Row = new Row();
+
+                Row.Append(
+                    ConstructCell("UserId", CellValues.String),
+                    ConstructCell(userId, CellValues.String));               
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("SessionId", CellValues.String),
+                    ConstructCell(sessionId, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("UserIp", CellValues.String),
+                    ConstructCell(userIp, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("VisitDate", CellValues.String),
+                    ConstructCell(visitDate, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("Device", CellValues.String),
+                    ConstructCell(device, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("Browser", CellValues.String),
+                    ConstructCell(browser, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("Location", CellValues.String),
+                    ConstructCell(location, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("Reffer", CellValues.String),
+                    ConstructCell(reffer, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(ConstructCell("PageName", CellValues.String));
+                foreach (PageObject page in pagesChart) Row.Append(ConstructCell(page.Name, CellValues.String));
+                sheetData.AppendChild(Row);
+                /*
+                Row = new Row();
+                Row.Append(ConstructCell("TimeOnPage", CellValues.String));
+                foreach (Models.Page page in session.Pages) Row.Append(ConstructCell(page.TimeOn.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(ConstructCell("CartItemName", CellValues.String));
+                foreach (CartItem cartItem in session.CartItems) Row.Append(ConstructCell(cartItem.ItemName, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(ConstructCell("CartItemAction", CellValues.String));
+                foreach (CartItem cartItem in session.CartItems) Row.Append(ConstructCell(cartItem.ItemAction, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(ConstructCell("BuyedItemName", CellValues.String));
+                foreach (BuyedItem buyedItem in session.BuyedItems) Row.Append(ConstructCell(buyedItem.ItemName, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(ConstructCell("BuyedQuantity", CellValues.String));
+                foreach (BuyedItem buyedItem in session.BuyedItems) Row.Append(ConstructCell(buyedItem.ItemQuantity.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("DidLogged", CellValues.String),
+                    ConstructCell(didLogged.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("DidContacted", CellValues.String),
+                    ConstructCell(didContacted.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                */
+                worksheetPart.Worksheet.Save();
+            }
+
         }
 
         private Session _session;
@@ -129,8 +232,8 @@ namespace VFSMonitor.ModelViews
             get => _reffer;
             set => SetProperty(ref _reffer, value);
         }
-        private IList<Page> _pages;
-        public IList<Page> pages
+        private IList<Models.Page> _pages;
+        public IList<Models.Page> pages
         {
             get => _pages;
             set => SetProperty(ref _pages, value);

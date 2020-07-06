@@ -32,7 +32,7 @@ namespace VFSMonitor.ModelViews
                 MostPopularLocation = AverageData.MostPopularLocation;
                 MostPopularReffer = AverageData.MostPopularReffer;
                 AverageTimeOnPages = AverageData.AverageTimeOnPages;
-                AvItemBuy = AverageData.AverageItemsBuy;
+                AvItemBuy = AverageData.AvItemBuy;
                 MostlyLogged = AverageData.MostlyLogged;
             }
             else
@@ -48,8 +48,8 @@ namespace VFSMonitor.ModelViews
                 MostPopularLocation = UserAverageData.MostPopularLocation;
                 MostPopularReffer = UserAverageData.MostPopularReffer;
                 AverageTimeOnPages = UserAverageData.AverageTimeOnPages;
-                AverageCartAction = UserAverageData.AverageCartAction;
-                AvItemBuy = UserAverageData.AverageItemsBuy;
+                AverageCartAction = UserAverageData.AvCartAction;
+                AvItemBuy = UserAverageData.AvItemBuy;
                 MostlyLogged = UserAverageData.MostlyLogged;
             }
             IsVisible = false;

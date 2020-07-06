@@ -5,6 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace VFSMonitor.ModelViews
 {
@@ -24,6 +27,31 @@ namespace VFSMonitor.ModelViews
             OnPropertyChanged(propertyName);
 
             return true;
+        }
+
+        protected WorksheetPart createWorkSheet(SpreadsheetDocument document, string name)
+        {
+            WorkbookPart workbookPart = document.AddWorkbookPart();
+            workbookPart.Workbook = new Workbook();
+
+            WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet();
+
+            Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+            Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = name };
+            sheets.Append(sheet);
+
+            workbookPart.Workbook.Save();
+            return worksheetPart;
+        }
+
+        protected DocumentFormat.OpenXml.Spreadsheet.Cell ConstructCell(string value, CellValues dataType)
+        {
+            return new DocumentFormat.OpenXml.Spreadsheet.Cell()
+            {
+                CellValue = new CellValue(value),
+                DataType = new EnumValue<CellValues>(dataType)
+            };
         }
     }
 }

@@ -17,17 +17,22 @@ namespace VFSMonitor.Views
     [DesignTimeVisible(false)]
     public partial class DetailsPage : ContentPage
     {
-
+        private DetailsViewModel viewModel;
         public DetailsPage(Session item)
         {
             InitializeComponent();
             //(BindingContext as DetailsViewModel).session = item;
-            DetailsViewModel viewModel = new DetailsViewModel(item);
+            viewModel = new DetailsViewModel(item);
             BindingContext = viewModel;
 
             PagesChart.Chart = new PieChart { Entries = viewModel.pagesChart };
             BuyedChart.Chart = new RadialGaugeChart { Entries = viewModel.buyedItemsChart };
             listStack.HeightRequest = 75*item.CartItems.Count;
+        }
+
+        private void Export_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Export To Excel", viewModel.SaveToExcelControl(), "OK");
         }
     }
 }
