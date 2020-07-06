@@ -5,6 +5,7 @@ using Microcharts;
 using System;
 using System.Collections.Generic;
 using VFSMonitor.Models;
+using Xamarin.Forms.Internals;
 
 namespace VFSMonitor.ModelViews
 {
@@ -78,7 +79,7 @@ namespace VFSMonitor.ModelViews
             string date = DateTime.Now.ToShortDateString();
             date = date.Replace("/", "_");
 
-            string fileName = System.IO.Path.Combine(App.path, date + "VeganShopSession"+ sessionId + "Details.xlsx");
+            string fileName = System.IO.Path.Combine(App.path, date + "VeganShopSession" + sessionId + "Details.xlsx");
 
             using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {
@@ -90,7 +91,7 @@ namespace VFSMonitor.ModelViews
 
                 Row.Append(
                     ConstructCell("UserId", CellValues.String),
-                    ConstructCell(userId, CellValues.String));               
+                    ConstructCell(userId, CellValues.String));
                 sheetData.AppendChild(Row);
                 Row = new Row();
                 Row.Append(
@@ -128,44 +129,17 @@ namespace VFSMonitor.ModelViews
                     ConstructCell(reffer, CellValues.String));
                 sheetData.AppendChild(Row);
                 Row = new Row();
-                Row.Append(ConstructCell("PageName", CellValues.String));
-                foreach (PageObject page in pagesChart) Row.Append(ConstructCell(page.Name, CellValues.String));
-                sheetData.AppendChild(Row);
-                /*
-                Row = new Row();
-                Row.Append(ConstructCell("TimeOnPage", CellValues.String));
-                foreach (Models.Page page in session.Pages) Row.Append(ConstructCell(page.TimeOn.ToString(), CellValues.String));
-                sheetData.AppendChild(Row);
-                Row = new Row();
-                Row.Append(ConstructCell("CartItemName", CellValues.String));
-                foreach (CartItem cartItem in session.CartItems) Row.Append(ConstructCell(cartItem.ItemName, CellValues.String));
-                sheetData.AppendChild(Row);
-                Row = new Row();
-                Row.Append(ConstructCell("CartItemAction", CellValues.String));
-                foreach (CartItem cartItem in session.CartItems) Row.Append(ConstructCell(cartItem.ItemAction, CellValues.String));
-                sheetData.AppendChild(Row);
-                Row = new Row();
-                Row.Append(ConstructCell("BuyedItemName", CellValues.String));
-                foreach (BuyedItem buyedItem in session.BuyedItems) Row.Append(ConstructCell(buyedItem.ItemName, CellValues.String));
-                sheetData.AppendChild(Row);
-                Row = new Row();
-                Row.Append(ConstructCell("BuyedQuantity", CellValues.String));
-                foreach (BuyedItem buyedItem in session.BuyedItems) Row.Append(ConstructCell(buyedItem.ItemQuantity.ToString(), CellValues.String));
-                sheetData.AppendChild(Row);
-                Row = new Row();
                 Row.Append(
                     ConstructCell("DidLogged", CellValues.String),
                     ConstructCell(didLogged.ToString(), CellValues.String));
                 sheetData.AppendChild(Row);
                 Row = new Row();
-                Row.Append(
-                    ConstructCell("DidContacted", CellValues.String),
-                    ConstructCell(didContacted.ToString(), CellValues.String));
+                Row.Append(ConstructCell("DidContacte", CellValues.String));
+                Row.Append(ConstructCell(didContacted.ToString(), CellValues.String));
                 sheetData.AppendChild(Row);
-                */
+
                 worksheetPart.Worksheet.Save();
             }
-
         }
 
         private Session _session;

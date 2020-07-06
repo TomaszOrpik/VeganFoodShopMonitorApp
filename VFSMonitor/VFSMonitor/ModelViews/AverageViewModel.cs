@@ -1,7 +1,8 @@
-﻿using Refit;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Refit;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using VFSMonitor.Intefaces;
 using VFSMonitor.Models;
 
@@ -54,7 +55,92 @@ namespace VFSMonitor.ModelViews
             }
             IsVisible = false;
             IsBusy = false;
+        }
 
+        public string SaveToExcelControl()
+        {
+            try { SaveToExcel(); }
+            catch (Exception e) { return "Occured error: " + e.Message; }
+            return "Data Exported Succesfully!";
+        }
+
+        private void SaveToExcel()
+        {
+            string date = DateTime.Now.ToShortDateString();
+            date = date.Replace("/", "_");
+            string fileName;
+            if (IsExtraDataVisible) fileName = System.IO.Path.Combine(App.path, date + "VeganShopUserAverage" + UserId + "Details.xlsx");
+            else fileName = System.IO.Path.Combine(App.path, date + "VeganShopGlobalAverageDetails.xlsx");
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
+            {
+                WorksheetPart worksheetPart;
+                if(IsExtraDataVisible) worksheetPart = createWorkSheet(document, UserId + "Average");
+                else worksheetPart = createWorkSheet(document, "GlobalAverage");
+                
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                Row Row;
+
+                if(IsExtraDataVisible)
+                {
+                    Row = new Row();
+                    Row.Append(
+                        ConstructCell("UserId", CellValues.String),
+                        ConstructCell(UserId, CellValues.String));
+                    sheetData.AppendChild(Row);
+
+                    Row = new Row();
+                    Row.Append(
+                        ConstructCell("UserIp", CellValues.String),
+                        ConstructCell(UserIp, CellValues.String));
+                    sheetData.AppendChild(Row);
+
+                    Row = new Row();
+                    Row.Append(
+                        ConstructCell("AverageCartAction", CellValues.String),
+                        ConstructCell(AverageCartAction, CellValues.String));
+                    sheetData.AppendChild(Row);
+                }
+
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("MostUsedDevice", CellValues.String),
+                    ConstructCell(MostUsedDevice, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("MostUsedBrowser", CellValues.String),
+                    ConstructCell(MostUsedBrowser, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("MostPopularLocation", CellValues.String),
+                    ConstructCell(MostPopularLocation, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("MostPopularReffer", CellValues.String),
+                    ConstructCell(MostPopularReffer, CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("AverageTimeOnPages", CellValues.String),
+                    ConstructCell(AverageTimeOnPages.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("AverageItemsBuy", CellValues.String),
+                    ConstructCell(AvItemBuy.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+                Row = new Row();
+                Row.Append(
+                    ConstructCell("MostlyLogged", CellValues.String),
+                    ConstructCell(MostlyLogged.ToString(), CellValues.String));
+                sheetData.AppendChild(Row);
+
+                worksheetPart.Worksheet.Save();
+            }
         }
 
         private string _Title;

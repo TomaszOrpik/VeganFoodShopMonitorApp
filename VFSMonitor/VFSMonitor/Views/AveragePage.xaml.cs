@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VFSMonitor.ModelViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,11 +8,18 @@ namespace VFSMonitor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AveragePage : ContentPage
     {
+        private AverageViewModel Model;
+        
         public AveragePage(string userId)
         {
             InitializeComponent();
+            Model = new AverageViewModel(userId);
+            BindingContext = Model;
+        }
 
-            BindingContext = new AverageViewModel(userId);
+        private void Export_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Export To Excel", Model.SaveToExcelControl(), "OK");
         }
     }
 }

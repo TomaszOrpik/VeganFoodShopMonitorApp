@@ -51,7 +51,7 @@
                 <CheckBox IsEnabled="False" IsChecked="{Binding MostlyLogged}" Color="Black" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Green" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Button Text="Export to EXCEL" Style="{StaticResource ButtonStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+            <Button Text="Export to EXCEL" Style="{StaticResource ButtonStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" Clicked="Export_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
