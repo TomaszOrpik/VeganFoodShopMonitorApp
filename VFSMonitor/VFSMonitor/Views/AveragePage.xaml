@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Padding="20, 20, 20, 20"
+             BackgroundColor="White"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="VFSMonitor.Views.AveragePage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource PageMaster}">
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsExtraDataVisible}">
+                <Label Text="User Id" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding UserId}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsExtraDataVisible}">
+                <Label Text="User Ip" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding UserIp}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Most Used Device" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding MostUsedDevice}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Most Used Browser" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding MostUsedBrowser}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Most Popular Location" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding MostPopularLocation}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Most Popular Reffer" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding MostPopularReffer}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Average Time On Page" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding AverageTimeOnPages}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsExtraDataVisible}">
+                <Label Text="Average Cart Action" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding AverageCartAction}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Average Items Buy" Style="{StaticResource AverageKeyStyle}"/>
+                <Label Text="{Binding AvItemBuy}" Style="{StaticResource AverageValueStyle}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Mostly Logged" Style="{StaticResource AverageKeyStyle}"/>
+                <CheckBox IsEnabled="False" IsChecked="{Binding MostlyLogged}" Color="Black" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Green" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Text="Export to EXCEL" Style="{StaticResource ButtonStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
