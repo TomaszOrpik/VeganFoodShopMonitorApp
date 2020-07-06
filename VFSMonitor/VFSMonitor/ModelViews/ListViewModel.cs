@@ -1,3 +1,6 @@
+﻿using PCLStorage;
+using Plugin.Permissions;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.IO;
