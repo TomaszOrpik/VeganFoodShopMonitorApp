@@ -9,7 +9,7 @@ namespace VFSMonitor.Intefaces
 {
     public interface IMonitorApiUserSessions
     {
-        [Get("/sessions/user/{id}")]
+        [Get("/sessions_user/{id}")]
         Task<List<Session>> GetUserSessions([AliasAs("id")] string userId);
     }
 }

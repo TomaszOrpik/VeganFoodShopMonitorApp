@@ -5,7 +5,6 @@ using Microcharts;
 using System;
 using System.Collections.Generic;
 using VFSMonitor.Models;
-using Xamarin.Forms.Internals;
 
 namespace VFSMonitor.ModelViews
 {

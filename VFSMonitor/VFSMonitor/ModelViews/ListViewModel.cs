@@ -1,19 +1,11 @@
-﻿using PCLStorage;
-using Plugin.Permissions;
-using Refit;
+﻿using Refit;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using VFSMonitor.Intefaces;
 using VFSMonitor.Interfaces;
 using VFSMonitor.Models;
-using VFSMonitor.Views;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace VFSMonitor.ModelViews
 {

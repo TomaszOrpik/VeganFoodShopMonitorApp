@@ -9,7 +9,7 @@ namespace VFSMonitor.Intefaces
 {
     public interface IMonitorApiUserAverage
     {
-        [Get("/users/average/{id}")]
+        [Get("/users_average/{id}")]
         Task<UserAverageData> GetUserAverage([AliasAs("id")] string userId);
     }
 }
