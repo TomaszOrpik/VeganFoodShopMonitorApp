@@ -1,6 +1,8 @@
 # VeganFoodShopMonitorApp
 Mobile App for controling activity on website.
 
+For Polish version of App [click here](https://github.com/TomaszOrpik/VeganFoodShopMonitorAppPL)
+
 # Introduction
 
 App was created as companion app for [VegeFood Shop](https://vegeshop-714fb.web.app/) users. Main functionality of this mobile app is to display data collected through [MonitorAPI](https://github.com/TomaszOrpik/MonitorApi_Nodejs). Data is formatted by API and easy to save on the phone as csv or excel file.
