@@ -29,7 +29,7 @@ Libraries used in project:
 
 Application main features:
 * Check all activity from global scale to single session on page
-* Access logs about users acvtivity on [VegeFood Shop]()
+* Access logs about users acvtivity on [VegeFood Shop](https://vegeshop-714fb.web.app/)
 * Get average data of users activity
 * Check every session on page by session Id
 * Information displayed as charts
