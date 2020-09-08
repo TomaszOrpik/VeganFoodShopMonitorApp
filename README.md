@@ -50,7 +50,7 @@ Application main features:
 You can report encountered bugs or send ideas for improvement [here](https://github.com/TomaszOrpik/VeganFoodShopMonitorApp/issues/new)
 
 ### License
-Application was uploaded under GENERAL PUBLIC LICENSE for more information [check license file](https://github.com/TomaszOrpik/MonitorApi_Nodejs/blob/master/LICENSE) link to license
+Application was uploaded under GENERAL PUBLIC LICENSE for more information [check license file](https://github.com/TomaszOrpik/VeganFoodShopMonitorApp/blob/master/LICENSE)
 
 ### Contact
 Feel free to [Contact me!](https://github.com/TomaszOrpik)
